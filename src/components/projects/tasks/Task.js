@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import EditTask from './EditTask';
 
 class Task extends Component {
   async completeTask(task) {
@@ -36,10 +37,13 @@ class Task extends Component {
             {
               this.task.status === 'todo'
               ? <a className="complete" href="#">
-                  <FontAwesomeIcon icon={faCheckSquare} onClick={() => this.completeTask(this.task)} size="lg"/>
+                  <FontAwesomeIcon icon={faCheckSquare} onClick={() => this.completeTask(this.task)}/>
               </a>
               : null
             }
+          </td>
+          <td>
+            <EditTask object={this.task}/>
           </td>
           <td>
             <a className="delete" href="#" onClick={() => this.deleteTask(this.task)}>
