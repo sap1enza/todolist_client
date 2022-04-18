@@ -1,0 +1,52 @@
+$yellow: #F5DD16;
+$dark-grey: #949393;
+$light-grey: #d1cece;
+$red: #EE4525;
+$green: #008000;
+
+$peter-river: #3498db;
+$belize-hole: #2980b9;
+
+.header {
+  padding-top: 30px;
+}
+
+.project-box {
+  border: 1px solid $light-grey;
+  border-radius: 9px;
+  margin: 0px 20px;
+  padding: 20px;
+
+  .project-actions {
+    padding-bottom: 40px;
+
+    .btn {
+      font-size: 0.9rem;
+    }
+  }
+
+  table {
+    tbody > tr:nth-child(1) > td {
+      border-top: 0;
+    }
+    font-weight: 500;
+    margin-bottom: 5px;
+
+    .complete {
+      color: $peter-river;
+    }
+    .delete {
+      color: $red;
+    }
+  }
+
+  .task-status {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    border: 1px solid $belize-hole;
+    border-radius: 10px;
+    text-align: center;
+    background-color: $peter-river;
+    color: white;
+  }
+}
