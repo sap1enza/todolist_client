@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons'
+import AppContext from './../../../AppContext'
+import { getProjects } from './../../../actions/getProjects'
 
 function EditTask(props) {
   const [name, setName] = useState(props.object.name);
   const [show, setShow] = useState('');
 
-  const { loadTasks } = props
+  const appContext = useContext(AppContext)
 
   const handleSubmit = (async () => {
     await fetch(`http://localhost:3001/tasks/${props.object.id}`,
@@ -24,7 +26,8 @@ function EditTask(props) {
     )
     setShow(false)
     setName('')
-    loadTasks();
+    const projects = await getProjects();
+    appContext.setProjects(projects);
   });
 
   return (

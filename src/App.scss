@@ -25,18 +25,27 @@ $belize-hole: #2980b9;
     }
   }
 
-  table {
-    tbody > tr:nth-child(1) > td {
+  .task-list {
+    padding: 0px;
+    list-style: none;
+
+    div > li {
+      border-top: 1px solid $light-grey;
+      padding-top: 10px;
+      margin: 10px 0px;
+    }
+
+    div > li:nth-child(1) {
+      padding-top: 0px;
       border-top: 0;
     }
     font-weight: 500;
-    margin-bottom: 5px;
 
     .complete {
       color: $peter-river;
     }
     .edit {
-      color: $peter-river;
+      color: $green;
     }
     .delete {
       color: $red;

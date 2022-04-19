@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import EditTask from './EditTask';
+import AppContext from './../../../AppContext'
+import { Row, Col } from 'react-bootstrap';
+import { getProjects } from './../../../actions/getProjects'
 
 class Task extends Component {
+  static contextType = AppContext
+
+  async loadProjects() {
+    const projects = await getProjects();
+    this.context.setProjects(projects);
+  }
+
   async completeTask(task) {
     await fetch(`http://localhost:3001/tasks/${task.id}`,
       {
@@ -18,12 +28,12 @@ class Task extends Component {
       }
     )
 
-    this.props.loadTasks();
+    this.loadProjects();
   }
   async deleteTask(task) {
     if (window.confirm(`Are you sure you want to delete: "${task.name}"`)) {
       await fetch(`http://localhost:3001/tasks/${task.id}`, {method: 'DELETE'});
-      this.props.loadTasks();
+      this.loadProjects();
     }
   }
   get task() {
@@ -31,9 +41,9 @@ class Task extends Component {
   }
   render() {
     return (
-      <tr key={this.task.id}>
-        <td className="col-md-10">{this.task.name}</td>
-        <td>
+      <Row key={this.task.id}>
+        <Col sm={8}>{this.task.name}</Col>
+        <Col>
             {
               this.task.status === 'todo'
               ? <a className="complete" href="#">
@@ -41,16 +51,16 @@ class Task extends Component {
               </a>
               : null
             }
-          </td>
-          <td>
-            <EditTask object={this.task} loadTasks={this.props.loadTasks}/>
-          </td>
-          <td>
+          </Col>
+          <Col>
+            <EditTask object={this.task} />
+          </Col>
+          <Col>
             <a className="delete" href="#" onClick={() => this.deleteTask(this.task)}>
               <FontAwesomeIcon icon={faTrashAlt}/>
             </a>
-          </td>
-      </tr>
+          </Col>
+      </Row>
     );
   }
 }

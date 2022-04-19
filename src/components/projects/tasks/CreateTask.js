@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button, Form } from 'react-bootstrap';
+import AppContext from './../../../AppContext'
+import { getProjects } from './../../../actions/getProjects'
 
 function CreateTask(props) {
   const [name, setName] = useState('');
   const [show, setShow] = useState('');
+
+  const appContext = useContext(AppContext)
 
   const handleSubmit = (async () => {
     await fetch(`http://localhost:3001/tasks`,
@@ -20,7 +24,8 @@ function CreateTask(props) {
     )
     setShow(false)
     setName('')
-    props.loadTasks();
+    const projects = await getProjects();
+    appContext.setProjects(projects);
   });
 
   return (
