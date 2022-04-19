@@ -32,8 +32,6 @@ class ProjectsList extends Component {
           })
         }
       )
-
-      console.log(this.context);
   }
 
   async loadProjects() {
