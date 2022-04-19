@@ -7,6 +7,8 @@ function EditTask(props) {
   const [name, setName] = useState(props.object.name);
   const [show, setShow] = useState('');
 
+  const { loadTasks } = props
+
   const handleSubmit = (async () => {
     await fetch(`http://localhost:3001/tasks/${props.object.id}`,
       {
@@ -22,7 +24,7 @@ function EditTask(props) {
     )
     setShow(false)
     setName('')
-    // props.loadTasks();
+    loadTasks();
   });
 
   return (

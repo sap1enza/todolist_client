@@ -43,7 +43,7 @@ class Task extends Component {
             }
           </td>
           <td>
-            <EditTask object={this.task}/>
+            <EditTask object={this.task} loadTasks={this.props.loadTasks}/>
           </td>
           <td>
             <a className="delete" href="#" onClick={() => this.deleteTask(this.task)}>
