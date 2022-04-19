@@ -7,10 +7,6 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import CreateProject from './../projects/CreateProject';
 
 class Header extends Component {
-  componentDidMount() {
-    console.log(this)
-  }
-
   render() {
     return (
       <div className="header">

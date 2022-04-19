@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button, Form } from 'react-bootstrap';
+import AppContext from './../../AppContext'
+import { getProjects } from './../../actions/getProjects'
 
 function CreateProject(props) {
   const [name, setName] = useState('');
   const [show, setShow] = useState('');
 
-  const handleSubmit = (async () => {
+  const { setProjects } = useContext(AppContext)
+
+  const handleSubmit = (async (e) => {
+    e.preventDefault();
+
     await fetch(`http://localhost:3001/projects`,
       {
         method: 'POST',
@@ -18,9 +24,11 @@ function CreateProject(props) {
         })
       }
     )
+
+    const projects = await getProjects();
+    setProjects(projects);
     setShow(false)
     setName('')
-    window.location.reload(false);
   });
 
   return (

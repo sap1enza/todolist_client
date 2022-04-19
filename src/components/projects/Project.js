@@ -7,7 +7,7 @@ class Project extends Component {
       <div>
         <h4>{this.props.name}</h4>
 
-        <TasksList project_id={this.props.id} loadProjects={this.props.loadProjects} />
+        <TasksList project_id={this.props.id} />
       </div>
     );
   }

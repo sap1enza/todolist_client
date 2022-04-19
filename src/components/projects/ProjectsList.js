@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Project from './Project';
+import AppContext from './../../AppContext'
+import { getProjects } from './../../actions/getProjects'
 
 class ProjectsList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      projects: []
-    };
-    this.loadProjects = this.loadProjects.bind(this);
-  }
+  static contextType = AppContext
+
   async loadProjects() {
-    let response = await fetch(`http://localhost:3001/projects`);
-    const projects = await response.json();
-    this.setState({ projects: projects });
+    const projects = await getProjects();
+    this.context.setProjects(projects);
   }
   componentDidMount() {
     this.loadProjects();
   }
+  get projects() {
+    return this.context.projects;
+  }
   render() {
     return (
       <Row className="pt-5">
-        {this.state.projects.map((project, _index) => {
+        {this.projects.map((project, _index) => {
           return <Col sm={5} className="project-box mb-5" key={project.id}>
-            <Project id={project.id} name={project.name} loadProjects={this.loadProjects} />
+            <Project id={project.id} name={project.name} />
           </Col>
         })}
       </Row>

@@ -1,20 +1,19 @@
 import './App.scss';
 import Container from 'react-bootstrap/Container'
-import React, { Component } from "react";
+import React from "react";
 import Header from './components/header/Header';
 import ProjectsList from './components/projects/ProjectsList';
+import { AppProvider } from './AppContext'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Container>
-          <Header />
-          <ProjectsList />
-        </Container>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <AppProvider>
+      <Container>
+        <Header />
+        <ProjectsList />
+      </Container>
+    </AppProvider>
+  );
 }
 
 export default App;

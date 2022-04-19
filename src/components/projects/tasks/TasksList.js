@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import CreateTask from './CreateTask';
 import Task from './Task';
+import AppContext from './../../../AppContext'
+import { getProjects } from './../../../actions/getProjects'
 
 class TasksList extends Component {
+  static contextType = AppContext
+
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +23,8 @@ class TasksList extends Component {
   async deleteProject(projectId) {
     if (window.confirm("Are you sure you want to delete the project?")) {
       await fetch(`http://localhost:3001/projects/${projectId}`, {method: 'DELETE'});
-      this.props.loadProjects();
+      const projects = await getProjects();
+      this.context.setProjects(projects);
     }
   }
   componentDidMount() {
